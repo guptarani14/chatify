@@ -101,8 +101,12 @@ export const getChatPartners = async (req, res) => {
     const chatPartners = await User.find({ _id: { $in: chatPartnerIds } }).select("-password");
 
     res.status(200).json(chatPartners);
-  } catch (error) {
-    console.error("Error in getChatPartners: ", error.message);
-    res.status(500).json({ error: "Internal server error" });
-  }
-};
+ } catch (error) {
+  console.log("========== IMAGE UPLOAD ERROR ==========");
+  console.log(error);
+
+  res.status(500).json({
+    message: error.message,
+    error,
+  });
+ }};
