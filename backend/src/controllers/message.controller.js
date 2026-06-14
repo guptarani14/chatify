@@ -102,16 +102,7 @@ export const getChatPartners = async (req, res) => {
 
     res.status(200).json(chatPartners);
   } catch (error) {
-  console.log("===== CLOUDINARY ERROR =====");
-  console.log(error);
-  console.log("MESSAGE:", error.message);
-
-  if (error.http_code) {
-    console.log("HTTP CODE:", error.http_code);
+    console.error("Error in getChatPartners: ", error.message);
+    res.status(500).json({ error: "Internal server error" });
   }
-
-  res.status(500).json({
-    error: error.message,
-  });
-}
 };
